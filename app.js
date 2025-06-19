@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+
+// Usar el puerto definido por Azure o 3000 si es local
+const port = process.env.PORT || 3000;
 
 // Middleware para parsear JSON
 app.use(express.json());
@@ -11,6 +13,11 @@ let datos = {
   nombre: 'Franklin',
   profesion: 'Desarrollador'
 };
+
+// Ruta raíz para probar si está viva
+app.get('/', (req, res) => {
+  res.send('<h2>API funcionando correctamente</h2><p>Prueba en <code>/api/datos</code></p>');
+});
 
 // GET - Obtener los datos
 app.get('/api/datos', (req, res) => {
